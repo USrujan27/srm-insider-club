@@ -14,6 +14,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'SRM Insider | Your Campus. Smarter.',
   description: 'Premium campus content platform for Placements, Internships, and Campus Life.',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   openGraph: {
     title: 'SRM Insider',
     description: 'Premium campus content platform for Placements, Internships, and Campus Life.',
@@ -40,9 +41,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${plusJakartaSans.className} min-h-screen bg-background relative selection:bg-indigo-500/30 overflow-x-hidden text-foreground flex flex-col`}>
         {/* Global Abstract Background */}
-        <div className="ambient-blob-indigo"></div>
-        <div className="ambient-blob-orange"></div>
-        <div className="noise-bg"></div>
+        <div className="ambient-blob-indigo dark:block hidden"></div>
+        <div className="ambient-blob-orange dark:block hidden"></div>
+        <div className="noise-bg opacity-30 dark:opacity-100"></div>
 
         <Providers>
           <CustomCursor />

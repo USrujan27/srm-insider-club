@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 
 export function SpotlightEffect() {
+  if (typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches) return null;
+
   const [isMobile, setIsMobile] = useState(false);
   const divRef = useRef<HTMLDivElement>(null);
 

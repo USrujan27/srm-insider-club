@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 import { ThemeToggle } from "./ThemeToggle";
@@ -24,6 +24,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const pathname = usePathname();
+  const shouldReduceMotion = useReducedMotion();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 50) {
@@ -36,12 +37,12 @@ export function Navbar() {
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
+        initial={shouldReduceMotion ? { y: 0, opacity: 0 } : { y: -100 }}
+        animate={shouldReduceMotion ? { opacity: 1 } : { y: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={`fixed top-4 inset-x-4 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
           isScrolled 
-            ? "glass-card py-3 w-full max-w-[90%] lg:max-w-7xl" 
+            ? "glass-card py-3 w-full max-w-[90%] lg:max-w-7xl border-b dark:border-white/5 border-black/5" 
             : "bg-transparent py-5 border-transparent"
         }`}
       >
@@ -49,7 +50,7 @@ export function Navbar() {
           {/* Logo Left */}
           <div className="flex flex-none items-center justify-start xl:flex-1">
             <Link href="/" className="flex items-center gap-2 group">
-              <span className="font-bold text-2xl text-white whitespace-nowrap" style={{ letterSpacing: '0.08em' }}>
+              <span className="font-bold text-2xl dark:text-white text-[#09090b] whitespace-nowrap" style={{ letterSpacing: '0.08em' }}>
                 SRM Insider
               </span>
               <div className="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_10px_2px_rgba(99,102,241,0.6)] animate-pulse" />
@@ -69,10 +70,10 @@ export function Navbar() {
                     isSpecial 
                       ? "text-[11px] lg:text-xs font-bold tracking-wider text-indigo-100 bg-indigo-500/20 hover:bg-indigo-500 hover:text-white px-3 py-1.5 rounded-full border border-indigo-500/30 shadow-[0_0_15px_rgba(99,102,241,0.4)]" 
                       : isDev 
-                        ? "text-[11px] lg:text-xs font-mono text-[#A1A1AA] hover:text-indigo-400 opacity-80" 
+                        ? "text-[11px] lg:text-xs font-mono dark:text-[#A1A1AA] text-[#52525b] hover:text-indigo-600 dark:hover:text-indigo-400 opacity-80" 
                         : isActive 
-                          ? "text-xs lg:text-sm font-medium text-white" 
-                          : "text-xs lg:text-sm font-medium text-[#A1A1AA] hover:text-white"
+                          ? "text-xs lg:text-sm font-bold dark:text-white text-indigo-600" 
+                          : "text-xs lg:text-sm font-medium dark:text-[#A1A1AA] text-[#52525b] dark:hover:text-white hover:text-[#09090b]"
                   }`}>
                     {link.name}
                   </span>
@@ -93,12 +94,12 @@ export function Navbar() {
           {/* Right Actions */}
           <div className="hidden md:flex flex-none xl:flex-1 items-center justify-end gap-3 lg:gap-4 truncate">
             <ThemeToggle />
-            <Link href="/login" className="text-sm font-medium text-[#A1A1AA] hover:text-white transition-colors duration-300 whitespace-nowrap">
+            <Link href="/login" className="text-sm font-medium dark:text-[#A1A1AA] text-[#52525b] dark:hover:text-white hover:text-[#09090b] transition-colors duration-300 whitespace-nowrap">
               Sign In
             </Link>
             <Link href="/signup" className="group relative shrink-0">
               <div className="absolute -inset-0.5 bg-indigo-500 rounded-full blur opacity-40 group-hover:opacity-100 transition duration-500"></div>
-              <button className="relative bg-[#050505] border border-white/10 text-white hover:bg-indigo-500 hover:text-white transition-all duration-300 px-4 lg:px-5 py-2 rounded-full text-sm font-medium active:scale-95 whitespace-nowrap">
+              <button className="relative bg-[#050505] dark:bg-[#050505] dark:text-white text-white dark:border-white/10 hover:bg-indigo-500 dark:hover:bg-indigo-500 hover:text-white transition-all duration-300 px-4 lg:px-5 py-2 rounded-full text-sm font-medium active:scale-95 whitespace-nowrap border-none">
                 Get Started
               </button>
             </Link>
@@ -109,7 +110,7 @@ export function Navbar() {
             <ThemeToggle />
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="text-white p-2"
+              className="dark:text-white text-[#09090b] p-2"
               aria-label="Open menu"
             >
               <Menu className="w-6 h-6" />
@@ -130,22 +131,22 @@ export function Navbar() {
               className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm md:hidden"
             />
             <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              initial={shouldReduceMotion ? { opacity: 0 } : { x: "100%" }}
+              animate={shouldReduceMotion ? { opacity: 1 } : { x: 0 }}
+              exit={shouldReduceMotion ? { opacity: 0 } : { x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[80vw] max-w-sm bg-[#050505] border-l border-white/10 z-50 p-6 flex flex-col md:hidden shadow-2xl overflow-y-auto"
+              className="fixed top-0 right-0 bottom-0 w-[80vw] max-w-sm dark:bg-[#050505] bg-[#f4f4f5] dark:border-l dark:border-white/10 border-l border-black/5 z-50 p-6 flex flex-col md:hidden shadow-2xl overflow-y-auto"
             >
               <div className="flex items-center justify-between mb-10 shrink-0">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-2xl text-white" style={{ letterSpacing: '0.08em' }}>
+                  <span className="font-bold text-2xl dark:text-white text-[#09090b]" style={{ letterSpacing: '0.08em' }}>
                     SRM Insider
                   </span>
                   <div className="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.6)]" />
                 </div>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-[#A1A1AA] hover:text-white transition-colors"
+                  className="dark:text-[#A1A1AA] text-[#52525b] hover:dark:text-white hover:text-[#09090b] transition-colors"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -165,8 +166,8 @@ export function Navbar() {
                         isSpecial
                           ? "w-fit text-sm font-bold tracking-wider text-indigo-100 bg-indigo-500/20 px-4 py-2 rounded-full border border-indigo-500/30 shadow-[0_0_15px_rgba(99,102,241,0.4)]"
                           : isDev
-                          ? "font-mono text-sm text-[#A1A1AA] hover:text-indigo-400"
-                          : "font-medium text-[#A1A1AA] hover:text-white"
+                          ? "font-mono text-sm dark:text-[#A1A1AA] text-[#52525b] hover:text-indigo-600 dark:hover:text-indigo-400"
+                          : "font-bold dark:text-[#A1A1AA] text-[#52525b] dark:hover:text-white hover:text-[#09090b]"
                       }`}
                     >
                       {link.name}
@@ -174,12 +175,12 @@ export function Navbar() {
                   );
                 })}
                 
-                <div className="h-px w-full bg-white/10 my-4" />
+                <div className="h-px w-full dark:bg-white/10 bg-black/5 my-4" />
                 
                 <Link 
                   href="/login" 
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-medium text-[#A1A1AA] hover:text-white transition-colors"
+                  className="text-lg font-bold dark:text-[#A1A1AA] text-[#52525b] dark:hover:text-white hover:text-[#09090b] transition-colors"
                 >
                   Sign In
                 </Link>

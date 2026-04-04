@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export function CustomCursor() {
+  if (typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches) return null;
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   

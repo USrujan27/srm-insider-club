@@ -1,9 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Calendar, MapPin } from "lucide-react";
 
 export default function EventsPage() {
+  const shouldReduceMotion = useReducedMotion();
+  
   const upcomingEvents = [
     { title: "Milan Tech Symposium", date: "Oct 15, 2026", venue: "Mini Auditorium", desc: "Annual technical symposium featuring guest lectures and hackathons." },
     { title: "SRM Hackathon 4.0", date: "Nov 02, 2026", venue: "Tech Park", desc: "48-hour intense coding competition designed to solve real-world problems." },
@@ -21,18 +23,18 @@ export default function EventsPage() {
   ];
 
   return (
-    <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto selection:bg-indigo-500/30">
+    <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto selection:bg-indigo-500/30 dark:bg-[#050505] bg-[var(--bg)] transition-colors duration-500">
       <motion.section 
-        initial={{ opacity: 0, y: 20 }}
+        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
         className="text-center mb-20"
       >
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-white drop-shadow-2xl">
+        <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 dark:text-white text-[#09090b] drop-shadow-2xl font-heading uppercase">
           What&apos;s <span className="text-gradient">Happening</span> at SRM
         </h1>
-        <p className="text-lg md:text-xl text-[#A1A1AA] max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl dark:text-[#A1A1AA] text-[#52525b] max-w-2xl mx-auto font-bold uppercase tracking-tight opacity-80">
           Don&apos;t miss out on the biggest tech, cultural, and community events on campus.
         </p>
       </motion.section>
@@ -40,46 +42,50 @@ export default function EventsPage() {
       {/* Upcoming Events */}
       <section className="mb-24">
         <motion.div 
-          initial={{ opacity: 0, x: -20 }}
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="flex items-center gap-4 mb-8"
+          className="flex items-center gap-4 mb-10"
         >
-          <div className="w-3 h-8 bg-indigo-500 rounded-full shadow-[0_0_15px_rgba(99,102,241,0.6)]" />
-          <h2 className="text-3xl font-bold text-white tracking-tight">Upcoming Events</h2>
+          <div className="w-2.5 h-8 bg-indigo-500 rounded-full shadow-[0_0_15px_rgba(99,102,241,0.8)]" />
+          <h2 className="text-3xl font-black dark:text-white text-[#09090b] tracking-tighter uppercase tracking-widest">Upcoming</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {upcomingEvents.map((event, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="glass-card liquid-hover p-6 md:p-8 group relative overflow-hidden flex flex-col h-full"
+              className="glass-card liquid-hover p-6 md:p-10 group relative overflow-hidden flex flex-col h-full border dark:border-white/10 border-black/10 shadow-xl transition-all duration-500"
             >
-              <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 blur-[50px] group-hover:bg-indigo-500/20 transition-colors duration-500 pointer-events-none" />
+              <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 blur-[60px] group-hover:bg-indigo-500/20 transition-all duration-500 pointer-events-none dark:block hidden" />
               
-              <h3 className="text-2xl font-bold text-white mb-4 tracking-snug relative z-10">{event.title}</h3>
+              <h3 className="text-3xl font-black dark:text-white text-[#09090b] mb-6 tracking-tight relative z-10 font-heading uppercase">{event.title}</h3>
               
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 mb-6 text-sm text-[#A1A1AA] relative z-10">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mb-8 text-xs font-bold uppercase tracking-widest dark:text-[#A1A1AA] text-[#52525b] relative z-10">
                 <div className="flex items-center gap-2">
-                  <Calendar size={16} className="text-indigo-400" />
-                  <span>{event.date}</span>
+                  <Calendar size={18} className="text-indigo-600 dark:text-indigo-400" />
+                  <span className="dark:text-white text-[#09090b]">{event.date}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin size={16} className="text-indigo-400" />
-                  <span>{event.venue}</span>
+                  <MapPin size={18} className="text-indigo-600 dark:text-indigo-400" />
+                  <span className="dark:text-white text-[#09090b]">{event.venue}</span>
                 </div>
               </div>
               
-              <p className="text-[#A1A1AA] leading-relaxed text-sm flex-grow relative z-10">
+              <p className="dark:text-[#A1A1AA] text-[#52525b] leading-relaxed text-sm flex-grow relative z-10 font-medium opacity-80">
                 {event.desc}
               </p>
 
-              <button className="mt-8 w-full md:w-auto py-2 px-6 bg-white/5 border border-white/10 rounded-full text-white text-sm font-semibold hover:bg-indigo-500 hover:border-indigo-400 transition-all shadow-inner hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] relative z-10">
-                View Details
+              <button className="mt-10 group/btn relative w-full md:w-fit py-3 px-8 rounded-full overflow-hidden transition-all duration-300">
+                <div className="absolute inset-0 bg-indigo-500 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300" />
+                <span className="relative z-10 text-xs font-black uppercase tracking-widest dark:text-white text-[#09090b] group-hover/btn:text-white transition-colors flex items-center justify-center border dark:border-white/10 border-black/10 py-3 px-8 rounded-full">
+                  Explore Event
+                </span>
+                <div className="absolute inset-x-0 bottom-0 h-[1px] bg-indigo-500/50" />
               </button>
             </motion.div>
           ))}
@@ -89,35 +95,34 @@ export default function EventsPage() {
       {/* Past Events */}
       <section>
         <motion.div 
-          initial={{ opacity: 0, x: -20 }}
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="flex items-center gap-4 mb-8"
+          className="flex items-center gap-4 mb-10"
         >
-          <div className="w-3 h-8 bg-white/20 rounded-full" />
-          <h2 className="text-3xl font-bold text-white tracking-tight">Past Events</h2>
+          <div className="w-2.5 h-8 dark:bg-white/10 bg-black/10 rounded-full" />
+          <h2 className="text-3xl font-black dark:text-white text-[#09090b] tracking-tighter uppercase tracking-widest opacity-60">Archive</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {pastEvents.map((event, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="glass p-5 rounded-xl border border-white/5 opacity-80 hover:opacity-100 transition-opacity"
+              className="glass p-6 rounded-2xl border dark:border-white/5 border-black/5 opacity-60 hover:opacity-100 hover:dark:border-white/20 hover:border-black/20 transition-all group cursor-default"
             >
-              <h4 className="text-lg font-semibold text-white mb-3">{event.title}</h4>
-              <div className="text-xs text-[#A1A1AA] space-y-1">
-                <div>{event.date}</div>
-                <div>{event.venue}</div>
+              <h4 className="text-lg font-black dark:text-white text-[#09090b] mb-4 tracking-tight uppercase group-hover:dark:text-indigo-300 group-hover:text-indigo-600 transition-colors">{event.title}</h4>
+              <div className="text-[10px] font-black uppercase tracking-widest dark:text-[#A1A1AA] text-[#52525b] space-y-1.5 opacity-70">
+                <div className="flex items-center gap-2"><Calendar size={12} /> {event.date}</div>
+                <div className="flex items-center gap-2"><MapPin size={12} /> {event.venue}</div>
               </div>
             </motion.div>
           ))}
         </div>
       </section>
-
     </main>
   );
 }
