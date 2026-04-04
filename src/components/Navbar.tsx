@@ -49,7 +49,7 @@ export function Navbar() {
           {/* Logo Left */}
           <div className="flex flex-none items-center justify-start xl:flex-1">
             <Link href="/" className="flex items-center gap-2 group">
-              <span className="font-bold text-xl tracking-tighter text-white whitespace-nowrap">
+              <span className="font-bold text-2xl text-white whitespace-nowrap" style={{ letterSpacing: '0.08em' }}>
                 SRM Insider
               </span>
               <div className="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_10px_2px_rgba(99,102,241,0.6)] animate-pulse" />
@@ -138,7 +138,7 @@ export function Navbar() {
             >
               <div className="flex items-center justify-between mb-10 shrink-0">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-xl tracking-tighter text-white">
+                  <span className="font-bold text-2xl text-white" style={{ letterSpacing: '0.08em' }}>
                     SRM Insider
                   </span>
                   <div className="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.6)]" />

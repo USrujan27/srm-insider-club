@@ -38,7 +38,7 @@ export default function Home() {
   const previewPosts = mockPosts.slice(0, 6);
  
   return (
-    <div className="flex flex-col overflow-hidden relative min-h-screen bg-[#050505]">
+    <div className="flex flex-col overflow-hidden relative min-h-screen bg-[var(--bg)] transition-colors duration-300">
       
       {/* ── Hero Section wrapped in MaskReveal ── */}
       <MaskReveal
@@ -192,7 +192,7 @@ export default function Home() {
       </section>
  
       {/* Marquee Section */}
-      <section className="py-32 relative overflow-hidden border-y border-white/5 bg-[#050505]/50 backdrop-blur-md">
+      <section className="py-32 relative overflow-hidden border-y border-white/5 bg-[var(--bg)]/50 backdrop-blur-md">
         <div className="container px-4 mx-auto mb-16 relative z-10 flex flex-col items-center md:items-start text-center md:text-left">
           <motion.div 
             initial={{ opacity: 0, y: 15 }} 
@@ -218,8 +218,8 @@ export default function Home() {
  
         <div className="relative flex w-full overflow-hidden group">
           {/* Gradient Masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-[#050505] to-transparent z-20 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-[#050505] to-transparent z-20 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-[var(--bg)] to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-[var(--bg)] to-transparent z-20 pointer-events-none" />
           
           <div className="flex animate-[marquee_40s_linear_infinite] group-hover:[animation-play-state:paused] gap-6 px-4 shrink-0 hover-lift">
             {[...previewPosts, ...previewPosts, ...previewPosts].map((post, i) => (
