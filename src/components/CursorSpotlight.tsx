@@ -29,7 +29,7 @@ export function CursorSpotlight() {
 
   if (isMobile) return null;
 
-  const bgGradient = useMotionTemplate`radial-gradient(600px circle at ${smoothX}px ${smoothY}px, rgba(99,102,241,0.06), transparent 50%)`;
+  const bgGradient = useMotionTemplate`radial-gradient(900px circle at ${smoothX}px ${smoothY}px, rgba(99,102,241,0.07), transparent 70%)`;
 
   return (
     <motion.div

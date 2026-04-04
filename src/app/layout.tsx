@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
-import { PageLoader } from '@/components/PageLoader';
 import { CustomCursor } from '@/components/CustomCursor';
 import { CursorSpotlight } from '@/components/CursorSpotlight';
 import { Navbar } from '@/components/Navbar';
@@ -46,7 +45,6 @@ export default function RootLayout({
         <div className="noise-bg"></div>
 
         <Providers>
-          <PageLoader />
           <CustomCursor />
           <CursorSpotlight />
           <Navbar />
