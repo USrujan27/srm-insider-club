@@ -28,7 +28,7 @@ export function PageLoader() {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.05 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, ease: "easeOut" as const }}
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
         >
           <motion.div

@@ -70,7 +70,7 @@ export default function LoginPage() {
     visible: (custom: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: custom * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+      transition: { delay: custom * 0.1, duration: 0.6, ease: "easeOut" }
     })
   };
 
@@ -87,7 +87,7 @@ export default function LoginPage() {
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, ease: "easeOut" as const }}
         className="w-full max-w-[420px] z-10"
       >
         <div className="glass-card liquid-hover rounded-[2.5rem] p-10 md:p-12 relative overflow-hidden">

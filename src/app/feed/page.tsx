@@ -57,7 +57,7 @@ export default function FeedPage() {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.6, ease: "easeOut" as const }}
         className="mb-14 text-center flex flex-col items-center"
       >
         <div className="inline-flex items-center px-4 py-1.5 rounded-full glass-pill text-indigo-300 text-xs font-semibold uppercase tracking-widest mb-6 border border-indigo-500/20 shadow-[0_0_15px_rgba(99,102,241,0.15)]">
@@ -169,7 +169,7 @@ export default function FeedPage() {
                       initial={{ opacity: 0, scale: 0.95, y: 20 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
-                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.5, ease: "easeOut" as const }}
                       key={post.id}
                       className="h-[400px] group relative"
                     >

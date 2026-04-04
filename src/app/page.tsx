@@ -56,7 +56,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              transition={{ duration: 0.8, ease: "easeOut" as const, delay: 0.1 }}
               className="inline-flex items-center rounded-full glass-pill px-4 py-1.5 text-sm font-medium text-indigo-300 mb-8 border border-indigo-500/30 bg-indigo-500/10 shadow-[0_0_20px_rgba(99,102,241,0.2)] group"
             >
               <Sparkles className="mr-2 h-4 w-4 animate-pulse text-indigo-400" />
@@ -66,7 +66,7 @@ export default function Home() {
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              transition={{ duration: 0.8, ease: "easeOut" as const, delay: 0.2 }}
               className="text-[clamp(3rem,8vw,7rem)] font-bold tracking-tighter mb-6 text-white leading-[1.1]"
             >
               Your Campus. <br className="hidden sm:block" />
@@ -79,7 +79,7 @@ export default function Home() {
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+              transition={{ duration: 0.8, ease: "easeOut" as const, delay: 0.3 }}
               className="max-w-[520px] leading-relaxed text-[#A1A1AA] sm:text-xl mb-12"
             >
               Don't just survive engineering. Master it. Access premium stories on FAANG placements, off-campus hikes, and the real campus survival guides.
@@ -88,7 +88,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+              transition={{ duration: 0.8, ease: "easeOut" as const, delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto"
             >
               <Link href="/feed" className="w-full sm:w-auto group relative">
@@ -168,7 +168,7 @@ export default function Home() {
               key={feature.title}
               variants={{
                 hidden: { opacity: 0, y: 40 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+                show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as const } }
               }}
               whileHover={{ 
                 y: -10, 
@@ -237,7 +237,7 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: "easeOut" as const }}
           className="container relative z-10 max-w-4xl glass liquid-hover border border-white/10 p-12 md:p-20 rounded-[3rem] mx-auto text-center overflow-hidden"
         >
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none -z-10" />

@@ -15,7 +15,7 @@ export default function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [errors, setErrors] = useState<{ [key: string]: string | undefined }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
@@ -71,12 +71,13 @@ export default function SignupPage() {
     }, 1500);
   };
 
-  const formVariants = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const formVariants: any = {
     hidden: { opacity: 0, y: 30 },
     visible: (custom: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: custom * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+      transition: { delay: custom * 0.1, duration: 0.6, ease: "easeOut" as const }
     })
   };
 
@@ -93,7 +94,7 @@ export default function SignupPage() {
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, ease: "easeOut" as const }}
         className="w-full max-w-[420px] z-10"
       >
         <div className="glass-card rounded-[2.5rem] p-10 md:p-12 relative border border-white/10 bg-[#050505]/60 shadow-[0_30px_60px_rgba(0,0,0,0.6)] overflow-hidden">
