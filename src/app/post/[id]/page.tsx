@@ -10,12 +10,11 @@ import { mockPosts, Post } from "@/data/posts";
 import { ProgressBar } from "@/components/ProgressBar";
 import { PostCard } from "@/components/PostCard";
 import { SkeletonCard } from "@/components/SkeletonCard";
-import { Button } from "@/components/ui/button";
 
 export default function PostDetail() {
   const params = useParams();
   const router = useRouter();
-  const id = params.id as string;
+  const id = params?.id as string;
   const [post, setPost] = useState<Post | null>(null);
   const [mounted, setMounted] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -33,8 +32,13 @@ export default function PostDetail() {
       
       localStorage.setItem("lastViewedCategory", foundPost.category);
 
-      const bookmarks = JSON.parse(localStorage.getItem("srm_bookmarks") || "[]");
-      setIsBookmarked(bookmarks.includes(foundPost.id));
+      let bookmarks: string[] = [];
+      try {
+        bookmarks = JSON.parse(localStorage.getItem("srm_bookmarks") || "[]");
+      } catch {
+        bookmarks = [];
+      }
+      setIsBookmarked(Array.isArray(bookmarks) && bookmarks.includes(foundPost.id));
     }, 600);
 
     return () => clearTimeout(timer);
@@ -49,7 +53,13 @@ export default function PostDetail() {
 
   const handleBookmark = () => {
     if (!post) return;
-    const bookmarks = JSON.parse(localStorage.getItem("srm_bookmarks") || "[]");
+    let bookmarks: string[] = [];
+    try {
+      bookmarks = JSON.parse(localStorage.getItem("srm_bookmarks") || "[]");
+      if (!Array.isArray(bookmarks)) bookmarks = [];
+    } catch {
+      bookmarks = [];
+    }
     if (isBookmarked) {
       const newBookmarks = bookmarks.filter((b: string) => b !== post.id);
       localStorage.setItem("srm_bookmarks", JSON.stringify(newBookmarks));

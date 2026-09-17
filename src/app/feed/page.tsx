@@ -8,7 +8,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { FilterBar } from "@/components/FilterBar";
 import { SkeletonCard } from "@/components/SkeletonCard";
 import { EmptyState } from "@/components/EmptyState";
-import { mockPosts, Category } from "@/data/posts";
+import { mockPosts } from "@/data/posts";
 
 const CATEGORIES = ["All", "Placements", "Internships", "Campus Life"];
 
@@ -33,9 +33,12 @@ export default function FeedPage() {
   const filteredPosts = useMemo(() => {
     return mockPosts.filter((post) => {
       const matchCategory = activeCategory === "All" || post.category === activeCategory;
-      const q = searchQuery.toLowerCase();
+      const q = searchQuery.toLowerCase().trim();
+      if (!q) return matchCategory;
       const matchSearch =
         post.title.toLowerCase().includes(q) ||
+        post.description.toLowerCase().includes(q) ||
+        post.author.name.toLowerCase().includes(q) ||
         post.tags.some((tag) => tag.toLowerCase().includes(q));
       return matchCategory && matchSearch;
     });
@@ -65,7 +68,7 @@ export default function FeedPage() {
           Dashboard
         </div>
         <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 dark:text-white text-[#09090b]">
-          What's happening at SRM
+          What&apos;s happening at SRM
         </h1>
         <p className="dark:text-[#A1A1AA] text-[#52525b] text-lg max-w-2xl leading-relaxed">
           Discover stories, insights, and hidden campus secrets curated for you.

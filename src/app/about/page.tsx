@@ -18,7 +18,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto selection:bg-indigo-500/30 dark:bg-[#050505] bg-[var(--bg)] transition-colors duration-500">
+    <div className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto selection:bg-indigo-500/30 dark:bg-[#050505] bg-[var(--bg)] transition-colors duration-500">
       
       {/* Hero Section */}
       <motion.section 
@@ -91,6 +91,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-    </main>
+    </div>
   );
 }

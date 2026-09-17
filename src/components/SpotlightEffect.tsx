@@ -1,22 +1,25 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 
 export function SpotlightEffect() {
-  if (typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches) return null;
+  const isMobile = useSyncExternalStore(
+    (callback) => {
+      window.addEventListener("resize", callback);
+      return () => window.removeEventListener("resize", callback);
+    },
+    () =>
+      window.matchMedia("(hover: none)").matches ||
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.innerWidth <= 768,
+    () => true
+  );
 
-  const [isMobile, setIsMobile] = useState(false);
   const divRef = useRef<HTMLDivElement>(null);
-
-  // Use a ref for the mouse position to avoid state updates on every frame
   const mousePos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    // Check if it's a touch device / mobile
-    if (window.matchMedia("(pointer: coarse)").matches || window.innerWidth <= 768) {
-      setIsMobile(true);
-      return;
-    }
+    if (isMobile) return;
 
     let animationFrameId: number;
 
@@ -32,7 +35,6 @@ export function SpotlightEffect() {
       mousePos.current.y = e.clientY;
     };
 
-    // Initialize animation loop
     animationFrameId = requestAnimationFrame(updateSpotlight);
     window.addEventListener("mousemove", handleMouseMove);
 
@@ -40,20 +42,14 @@ export function SpotlightEffect() {
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isMobile]);
 
   if (isMobile) {
-    return null; /* Hide entirely on mobile */
+    return null;
   }
 
   return (
     <>
-      {/* Background layer image the user provided */}
-      <div
-        className="fixed inset-0 z-[1] w-full h-full opacity-60 bg-cover bg-center pointer-events-none"
-        style={{ backgroundImage: `url('/hoodie-bg.jpg')` }}
-      />
-
       {/* Spotlight interactive radial mask overlay */}
       <div
         ref={divRef}

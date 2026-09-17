@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { UserCircle, Mail, Lock, LogIn, AlertCircle, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
+import { UserCircle, Mail, Lock, AlertCircle, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -72,8 +72,7 @@ export default function SignupPage() {
     }, 1500);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const formVariants: any = {
+  const formVariants: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 30 },
     visible: (custom: number) => ({
       opacity: 1,

@@ -19,7 +19,7 @@ export default function StartupsPage() {
   const filteredStartups = filter === "All" ? startups : startups.filter(s => s.category === filter);
 
   return (
-    <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto selection:bg-indigo-500/30 dark:bg-[#050505] bg-[var(--bg)] transition-colors duration-500">
+    <div className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto selection:bg-indigo-500/30 dark:bg-[#050505] bg-[var(--bg)] transition-colors duration-500">
       <motion.section 
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -57,7 +57,7 @@ export default function StartupsPage() {
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
       >
         <AnimatePresence mode="popLayout">
-          {filteredStartups.map((startup, i) => (
+          {filteredStartups.map((startup) => (
             <motion.div
               layout={!shouldReduceMotion}
               initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
@@ -95,6 +95,6 @@ export default function StartupsPage() {
           ))}
         </AnimatePresence>
       </motion.div>
-    </main>
+    </div>
   );
 }

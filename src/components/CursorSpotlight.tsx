@@ -5,7 +5,6 @@ import { motion, useSpring, useMotionTemplate } from "framer-motion";
 
 export function CursorSpotlight() {
   const [isMobile, setIsMobile] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const springConfig = { damping: 40, stiffness: 150, mass: 0.5 };
   const smoothX = useSpring(0, springConfig);
@@ -18,7 +17,6 @@ export function CursorSpotlight() {
     }
 
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
       smoothX.set(e.clientX);
       smoothY.set(e.clientY);
     };

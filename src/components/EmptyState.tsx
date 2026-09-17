@@ -15,9 +15,9 @@ export function EmptyState({ message = "No posts found" }: { message?: string })
       <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mb-6">
         <SearchX className="w-10 h-10 text-muted-foreground" />
       </div>
-      <h3 className="text-xl font-bold tracking-tight mb-2">It's quiet here</h3>
+      <h3 className="text-xl font-bold tracking-tight mb-2">It&apos;s quiet here</h3>
       <p className="text-muted-foreground text-sm max-w-sm">
-        {message}. Try adjusting your search query or removing some filters to see what's trending.
+        {message}. Try adjusting your search query or removing some filters to see what&apos;s trending.
       </p>
     </motion.div>
   );

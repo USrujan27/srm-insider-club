@@ -1,10 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export function CustomCursor() {
-  if (typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches) return null;
+  const isTouchDevice = useSyncExternalStore(
+    (callback) => {
+      window.addEventListener("resize", callback);
+      return () => window.removeEventListener("resize", callback);
+    },
+    () => "ontouchstart" in window || navigator.maxTouchPoints > 0 || window.matchMedia("(hover: none)").matches,
+    () => true
+  );
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -14,11 +21,9 @@ export function CustomCursor() {
   const smoothY = useSpring(cursorY, springConfig);
 
   const [isHovered, setIsHovered] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(true);
 
   useEffect(() => {
-    // Check if device supports touch
-    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    if (isTouchDevice) return;
 
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
@@ -28,10 +33,10 @@ export function CustomCursor() {
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
-        target.tagName.toLowerCase() === 'a' ||
-        target.tagName.toLowerCase() === 'button' ||
-        target.closest('a') ||
-        target.closest('button')
+        target.tagName.toLowerCase() === "a" ||
+        target.tagName.toLowerCase() === "button" ||
+        target.closest("a") ||
+        target.closest("button")
       ) {
         setIsHovered(true);
       } else {
@@ -39,10 +44,8 @@ export function CustomCursor() {
       }
     };
 
-    if (!isTouchDevice) {
-      window.addEventListener("mousemove", moveCursor);
-      window.addEventListener("mouseover", handleMouseOver);
-    }
+    window.addEventListener("mousemove", moveCursor);
+    window.addEventListener("mouseover", handleMouseOver);
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);

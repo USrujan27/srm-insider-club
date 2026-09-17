@@ -75,7 +75,7 @@ export default function Home() {
                 </motion.h1>
                 
                 <p className="max-w-[520px] leading-relaxed text-[#A1A1AA] sm:text-xl mb-12">
-                Don't just survive engineering. Master it. Access premium stories on FAANG placements, off-campus hikes, and the real campus survival guides.
+                Don&apos;t just survive engineering. Master it. Access premium stories on FAANG placements, off-campus hikes, and the real campus survival guides.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
@@ -123,7 +123,7 @@ export default function Home() {
                 </h1>
                 
                 <p className="max-w-[520px] leading-relaxed text-[#52525b] sm:text-xl mb-12">
-                    Don't just survive engineering. Master it. Access premium stories on FAANG placements, off-campus hikes, and the real campus survival guides.
+                    Don&apos;t just survive engineering. Master it. Access premium stories on FAANG placements, off-campus hikes, and the real campus survival guides.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
@@ -165,7 +165,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-lg dark:text-[#A1A1AA] text-[#52525b]"
           >
-            We decode the hidden rules of campus success so you don't have to figure it out the hard way.
+            We decode the hidden rules of campus success so you don&apos;t have to figure it out the hard way.
           </motion.p>
         </div>
   
@@ -182,7 +182,7 @@ export default function Home() {
           }}
           className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto"
         >
-          {features.map((feature, i) => (
+          {features.map((feature) => (
             <motion.div
               key={feature.title}
               variants={{

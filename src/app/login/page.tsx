@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { LogIn, UserCircle, Lock, ArrowRight, AlertCircle, Sparkles } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
+import { UserCircle, Lock, ArrowRight, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -66,7 +66,7 @@ export default function LoginPage() {
     }, 1500);
   };
 
-  const formVariants: any = {
+  const formVariants: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 30 },
     visible: (custom: number) => ({
       opacity: 1,
@@ -214,7 +214,7 @@ export default function LoginPage() {
 
           <motion.div custom={5} variants={formVariants} initial="hidden" animate="visible" className="text-center mt-10">
             <p className="dark:text-[#A1A1AA] text-[#52525b] text-sm font-medium">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/signup" className="text-indigo-600 dark:text-indigo-400 font-black hover:underline transition-colors">
                 Create one now
               </Link>

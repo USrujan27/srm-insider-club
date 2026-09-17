@@ -23,7 +23,7 @@ export default function EventsPage() {
   ];
 
   return (
-    <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto selection:bg-indigo-500/30 dark:bg-[#050505] bg-[var(--bg)] transition-colors duration-500">
+    <div className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto selection:bg-indigo-500/30 dark:bg-[#050505] bg-[var(--bg)] transition-colors duration-500">
       <motion.section 
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -123,6 +123,6 @@ export default function EventsPage() {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
- 
-import { useCallback, useEffect, useRef, useState } from "react";
+
+import { useCallback, useEffect, useRef } from "react";
+import Image from "next/image";
  
 interface MaskRevealProps {
   revealSrc: string;
@@ -34,8 +35,8 @@ export default function MaskReveal({
     (x: number, y: number) => {
       if (!coverRef.current) return;
       const gradient = `radial-gradient(circle ${outerRadius}px at ${x}px ${y}px, transparent ${radius}px, black ${outerRadius}px)`;
-      coverRef.current.style.webkitMaskImage = gradient;
-      (coverRef.current.style as any).maskImage = gradient;
+      coverRef.current.style.setProperty("-webkit-mask-image", gradient);
+      coverRef.current.style.setProperty("mask-image", gradient);
     },
     [radius, outerRadius]
   );
@@ -61,8 +62,8 @@ export default function MaskReveal({
   // When cursor leaves, cover the whole area again
   const onMouseLeave = () => {
     if (coverRef.current) {
-      coverRef.current.style.webkitMaskImage = "none";
-      (coverRef.current.style as any).maskImage = "none";
+      coverRef.current.style.setProperty("-webkit-mask-image", "none");
+      coverRef.current.style.setProperty("mask-image", "none");
     }
   };
  
@@ -90,15 +91,15 @@ export default function MaskReveal({
           pointerEvents: "none",
         }}
       >
-        <img
+        <Image
           src={revealSrc}
           alt={revealAlt}
+          fill
+          priority
+          sizes="100vw"
           style={{
-            width: "100%",
-            height: "100%",
             objectFit: "cover",
             objectPosition: "center top",
-            display: "block",
             userSelect: "none",
           }}
           draggable={false}

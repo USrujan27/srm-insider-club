@@ -43,7 +43,7 @@ export default function NotFound() {
         </h2>
         
         <p className="text-[#A1A1AA] text-lg md:text-xl mb-12 max-w-lg leading-relaxed mix-blend-plus-lighter">
-          The campus insight you're looking for seems to have vanished. Let's get you back on track.
+          The campus insight you&apos;re looking for seems to have vanished. Let&apos;s get you back on track.
         </p>
 
         <Link href="/">

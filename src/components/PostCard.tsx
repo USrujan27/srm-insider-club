@@ -94,7 +94,7 @@ export function PostCard({ post, index = 0, compact = false }: PostCardProps) {
           {!compact && !shouldReduceMotion && (
              <div className="absolute inset-x-0 bottom-0 p-8 pt-20 bg-gradient-to-t dark:from-[#050505] dark:via-[#050505]/95 from-[#f4f4f5] via-[#f4f4f5]/98 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1] z-20 flex flex-col justify-end">
                 <p className="text-sm dark:text-[#A1A1AA] text-[#52525b] line-clamp-3 italic border-l-2 border-indigo-500 pl-4 leading-relaxed dark:bg-[#050505]/40 bg-white/40 p-2 rounded-r-lg">
-                  "{post.content.slice(0, 120)}..."
+                  &quot;{post.content.slice(0, 120)}...&quot;
                 </p>
                 <div className="mt-5 text-indigo-600 dark:text-indigo-400 text-sm font-bold flex flex-row items-center gap-2 group/readBtn relative overflow-hidden py-2 inline-flex w-max">
                   <span className="relative z-10">Read Full Story</span>

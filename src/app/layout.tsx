@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
@@ -11,10 +11,15 @@ import { Footer } from '@/components/Footer';
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'] });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
   title: 'SRM Insider | Your Campus. Smarter.',
   description: 'Premium campus content platform for Placements, Internships, and Campus Life.',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   openGraph: {
     title: 'SRM Insider',
     description: 'Premium campus content platform for Placements, Internships, and Campus Life.',
